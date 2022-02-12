@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Festive&display=swap");
+
+/*debugging tool*/
+* {
+	color: unset;
+	/*outline: 1px dashed red;*/
+}
+
+:root {
+	/*variables*/
+	--primary-light: #f9f9f9;
+	--primary-color: #9bbfcf;
+	--primary-dark: #2a2d56;
+	--accent-1: #ebac41;
+	--accent-2: #eb483e;
+
+	/*default fonts*/
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+#app {
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+}
+
+/*header group*/
+.header {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	background: var(--primary-dark);
+	color: white;
+}
+
+.header__logo {
+	margin-bottom: 0;
+	font-family: "Festive", cursive;
+}
+
+.header__slogan {
+	margin-top: 0;
+	font-weight: lighter;
+}
+
+/*main group*/
+.main {
+	background: var(--primary-light);
+}
+
+.main,
+.project-list {
+	flex: 1;
+}
+
+.main,
+.container-new-project-form {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.btn {
+	padding: 1em;
+	font-weight: bold;
+	appearance: none;
+	border: none;
+}
+
+.btn:hover {
+	background: var(--primary-color);
+}
