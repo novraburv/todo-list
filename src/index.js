@@ -1,5 +1,7 @@
 "use strict";
 
+// imported from npm
 import "normalize.css";
 
-console.log("Hello World!");
+// imported from local src
+import "./css/global.css";
