@@ -1,0 +1,13 @@
+.form {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.form__input {
+	padding: 1em;
+}
+
+.btn-close {
+	background: red;
+	color: white;
+}

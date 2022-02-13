@@ -37,6 +37,7 @@
 .header__logo {
 	margin-bottom: 0;
 	font-family: "Festive", cursive;
+	font-size: 1.5em;
 }
 
 .header__slogan {
@@ -55,7 +56,7 @@
 }
 
 .main,
-.container-new-project-form {
+.container-project-form {
 	display: flex;
 	flex-flow: column nowrap;
 }
