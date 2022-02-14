@@ -1,15 +1,16 @@
 "use strict";
 
-import { Form as ProjectFormFactory } from "./components/formProject";
+import { Form as generateProjectForm } from "./components/formProject";
 
 // a collection of UI operators
-export const UI = (() => {
+const UI = (() => {
   const createProjectButton = document.querySelector(".btn-create-project");
   const projectFormContainer = document.querySelector(
     ".container-project-form"
   );
   let projectForm = projectFormContainer.querySelector(".form");
 
+  // initialize functionalities
   const init = () => {
     createProjectButton.addEventListener("click", openProjectForm);
   };
@@ -19,7 +20,7 @@ export const UI = (() => {
     if (projectForm) {
       return closeProjectForm();
     }
-    projectForm = ProjectFormFactory();
+    projectForm = generateProjectForm();
     projectFormContainer.append(projectForm);
     createProjectButton.innerHTML =
       '<i class="material-icons-outlined">close</i>';
@@ -34,3 +35,5 @@ export const UI = (() => {
 
   return { init, closeProjectForm };
 })();
+
+export default UI;
