@@ -11,11 +11,11 @@ const TaskList = (list = []) => {
 	};
 
 	// return finished list
-	const getList = () => {
+	const getTaskList = () => {
 		return list;
 	};
 
-	return { getList, add, remove };
+	return { add, remove, getTaskList };
 };
 
 export default TaskList;

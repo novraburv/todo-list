@@ -2,9 +2,11 @@
 
 import TaskList from "./tasklist";
 
-const Project = (name, list = []) => {
+const Project = (name, taskList = []) => {
 	name;
-	list = TaskList(list);
+	taskList;
+
+	const list = TaskList(taskListist);
 
 	const getName = () => {
 		return name;
