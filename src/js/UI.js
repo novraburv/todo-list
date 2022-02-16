@@ -1,6 +1,6 @@
 "use strict";
 
-import { Form as generateProjectForm } from "./components/formProject";
+import { default as generateProjectForm } from "./components/formProject";
 
 // a collection of UI operators
 const UI = (() => {
@@ -8,6 +8,8 @@ const UI = (() => {
   const projectFormContainer = document.querySelector(
     ".container-project-form"
   );
+
+  // many many modals
   let projectForm = projectFormContainer.querySelector(".form");
 
   // initialize functionalities

@@ -1,9 +1,6 @@
 "use strict";
 
 const Task = (name, deadline) => {
-  name;
-  deadline;
-
   const getName = () => {
     return name;
   };
@@ -17,7 +14,7 @@ const Task = (name, deadline) => {
     deadline = newDeadline;
   };
 
-  // return finished task
+  // return finished task object
   const getTask = () => {
     return { name, deadline };
   };

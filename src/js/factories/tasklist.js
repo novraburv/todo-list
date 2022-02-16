@@ -1,7 +1,7 @@
 "use strict";
 
-const TaskList = (list = []) => {
-	list;
+const TaskList = () => {
+	const list = [];
 
 	const add = (task) => {
 		list.push(task);
@@ -10,7 +10,7 @@ const TaskList = (list = []) => {
 		list.splice(index, 1);
 	};
 
-	// return finished list
+	// return finished list array
 	const getTaskList = () => {
 		return list;
 	};

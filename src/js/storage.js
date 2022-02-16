@@ -16,9 +16,15 @@ const Storage = (() => {
 	// reveal data produced by the factories (Project, TaskList, and Task)
 	// before insert them into LocalStorage
 	const updateLocalStorage = (data) => {
-		data = data.map((x) => x.getProject());
-		data = data.forEach((x) => x.list.map((task) => task.getTask()));
-		localStorage.setItem("data", JSON.parse(data));
+		data = data
+			.map((project) => project.getProject())
+			.map((project) => {
+				return {
+					name: project.name,
+					taskList: project.taskList.getTaskList(),
+				};
+			});
+		localStorage.setItem("data", JSON.stringify(data));
 	};
 
 	// return finished Storage object
