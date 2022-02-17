@@ -14,7 +14,7 @@ const Task = (name, deadline) => {
     deadline = newDeadline;
   };
 
-  // return finished task object
+  // return finished task object ready for json
   const getTask = () => {
     return { name, deadline };
   };

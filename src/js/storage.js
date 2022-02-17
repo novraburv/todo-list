@@ -1,10 +1,13 @@
 "use strict";
 
+import { default as ProjectFactory } from "./factories/project";
+
 // module to control storage
 const Storage = (() => {
 	const projects = [];
 
 	const add = (project) => {
+		project = ProjectFactory(project);
 		projects.push(project);
 		updateLocalStorage(projects);
 	};
@@ -16,23 +19,16 @@ const Storage = (() => {
 	// reveal data produced by the factories (Project, TaskList, and Task)
 	// before insert them into LocalStorage
 	const updateLocalStorage = (data) => {
-		data = data
-			.map((project) => project.getProject())
-			.map((project) => {
-				return {
-					name: project.name,
-					taskList: project.taskList.getTaskList(),
-				};
-			});
+		data = data.map((project) => project.getProject());
 		localStorage.setItem("data", JSON.stringify(data));
 	};
 
 	// return finished Storage object
-	const getStorage = () => {
-		return projects;
+	const load = () => {
+		return projects.map((project) => project.getProject());
 	};
 
-	return { add, remove, getStorage };
+	return { add, remove, load };
 })();
 
 export default Storage;

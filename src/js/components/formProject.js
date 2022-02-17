@@ -2,7 +2,6 @@
 
 import "../../css/form.css";
 import UI from "../UI";
-import Project from "../factories/project";
 import Storage from "../storage";
 
 const Form = () => {
@@ -27,8 +26,7 @@ const Form = () => {
 
 const submitProject = () => {
 	const projectName = document.querySelector("#projectName").value;
-	const project = Project(projectName);
-	Storage.add(project);
+	Storage.add(projectName);
 	UI.closeProjectForm();
 };
 

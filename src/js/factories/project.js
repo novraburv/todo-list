@@ -13,9 +13,9 @@ const Project = (name, taskList) => {
 		name = newName;
 	};
 
-	// return finished project
+	// return finished project object ready for json
 	const getProject = () => {
-		return { name, taskList };
+		return { name, taskList: taskList.getTaskList() };
 	};
 
 	return { getName, setName, taskList, getProject };
