@@ -1,13 +1,10 @@
 "use strict";
 
-import { default as ProjectFactory } from "./factories/project";
-
 // module to control storage
 const Storage = (() => {
 	const projects = [];
 
 	const add = (project) => {
-		project = ProjectFactory(project);
 		projects.push(project);
 		updateLocalStorage(projects);
 	};

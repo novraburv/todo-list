@@ -1,12 +1,12 @@
 "use strict";
 
-import { default as TaskFactory } from "./task";
+import TaskFactory from "./task";
 
-const TaskList = (list) => {
+const TaskListFactory = (list) => {
 	if (!list) list = [];
 
 	const add = (name, deadline) => {
-		task = TaskFactory(name, deadline);
+		const task = TaskFactory(name, deadline);
 		list.push(task);
 	};
 	const remove = (index) => {
@@ -22,4 +22,4 @@ const TaskList = (list) => {
 	return { add, remove, getTaskList };
 };
 
-export default TaskList;
+export default TaskListFactory;

@@ -1,6 +1,9 @@
 "use strict";
 
 import { default as generateProjectForm } from "./components/formProject";
+import ProjectTemplate from "./components/project";
+import ProjectFactory from "./factories/project";
+import Storage from "./storage";
 
 // a collection of UI operators
 const UI = (() => {
@@ -8,6 +11,7 @@ const UI = (() => {
   const projectFormContainer = document.querySelector(
     ".container-project-form"
   );
+  const projectList = document.querySelector(".project-list");
 
   // many many modals
   let projectForm = projectFormContainer.querySelector(".form");
@@ -15,6 +19,12 @@ const UI = (() => {
   // initialize functionalities
   const init = () => {
     createProjectButton.addEventListener("click", openProjectForm);
+
+    const data = ProjectFactory("Default Project");
+    data.taskList.add("default task 1", "11/11/2011");
+    data.taskList.add("default task 2", "10/10/2012");
+    Storage.add(data);
+    renderProject();
   };
 
   // project form controls
@@ -35,7 +45,20 @@ const UI = (() => {
     createProjectButton.classList.remove("btn-close");
   };
 
-  return { init, closeProjectForm };
+  // render anything from the localStorage
+  const renderProject = () => {
+    const data = Storage.load();
+    let index = 0;
+
+    projectList.innerHTML = "";
+
+    data.forEach((project) => {
+      projectList.append(ProjectTemplate(project.name, index));
+      index++;
+    });
+  };
+
+  return { init, closeProjectForm, renderProject };
 })();
 
 export default UI;

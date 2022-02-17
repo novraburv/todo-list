@@ -1,10 +1,10 @@
 "use strict";
 
-import TaskList from "./tasklist";
+import TaskListFactory from "./tasklist";
 
-const Project = (name, taskList) => {
+const ProjectFactory = (name, taskList) => {
 	// activate taskList object
-	taskList = TaskList(taskList);
+	taskList = TaskListFactory(taskList);
 
 	const getName = () => {
 		return name;
@@ -21,4 +21,4 @@ const Project = (name, taskList) => {
 	return { getName, setName, taskList, getProject };
 };
 
-export default Project;
+export default ProjectFactory;

@@ -1,6 +1,6 @@
 "use strict";
 
-const Task = (name, deadline) => {
+const TaskFactory = (name, deadline) => {
   const getName = () => {
     return name;
   };
@@ -22,4 +22,4 @@ const Task = (name, deadline) => {
   return { getName, setName, getDeadline, setDeadline, getTask };
 };
 
-export default Task;
+export default TaskFactory;
