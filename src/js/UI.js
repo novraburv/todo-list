@@ -9,14 +9,13 @@ import Storage from "./storage";
 
 // a collection of UI operators
 const UI = (() => {
+  // constants
   const createProjectButton = document.querySelector(".btn-create-project");
-  const projectFormContainer = document.querySelector(
-    ".container-project-form"
-  );
   const projectList = document.querySelector(".project-list");
 
-  // many many modals
-  let projectForm = projectFormContainer.querySelector(".form");
+  // variables
+  let projectForm;
+  let tasklist;
 
   // initialize functionalities
   const init = () => {
@@ -30,17 +29,19 @@ const UI = (() => {
   };
 
   // project form controls
-  const projectFormTrigger = () => {
+  const projectFormTrigger = (e) => {
     if (projectForm) {
       closeProjectForm();
       return;
     }
-    openProjectForm();
+    openProjectForm(e);
   };
 
-  const openProjectForm = () => {
+  const openProjectForm = (e) => {
+    const main = e.currentTarget.parentNode;
     projectForm = ProjectFormTemplate();
-    projectFormContainer.append(projectForm);
+    main.append(projectForm);
+
     createProjectButton.innerHTML =
       '<i class="material-icons-outlined">close</i>';
     createProjectButton.classList.add("btn-close");
@@ -48,15 +49,15 @@ const UI = (() => {
 
   const closeProjectForm = () => {
     projectForm = projectForm.remove();
+
     createProjectButton.textContent = "Create Project";
     createProjectButton.classList.remove("btn-close");
   };
 
   // project control that trigger Tasklist to be shown or hidden;
   const tasklistTrigger = (e) => {
-    const tasklist = e.currentTarget.parentNode.querySelector(".tasks");
     if (tasklist) {
-      tasklist.remove();
+      tasklist = tasklist.remove();
       return;
     }
     openTasklist(e);
@@ -64,7 +65,7 @@ const UI = (() => {
 
   const openTasklist = (e) => {
     const project = e.currentTarget.parentNode;
-    const tasklist = TasklistTemplate();
+    tasklist = TasklistTemplate();
     project.append(tasklist);
   };
 
@@ -81,7 +82,7 @@ const UI = (() => {
     });
   };
 
-  return { init, closeProjectForm, renderProject, tasklistTrigger };
+  return { init, projectFormTrigger, renderProject, tasklistTrigger };
 })();
 
 export default UI;

@@ -30,7 +30,7 @@ const submitProject = () => {
 	const project = ProjectFactory(projectName);
 	Storage.add(project);
 	UI.renderProject();
-	UI.closeProjectForm();
+	UI.projectFormTrigger();
 };
 
 export default ProjectFormTemplate;
