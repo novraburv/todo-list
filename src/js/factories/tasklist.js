@@ -3,7 +3,14 @@
 import TaskFactory from "./task";
 
 const TaskListFactory = (list) => {
-	if (!list) list = [];
+	// activate list either when loaded from localStorage or created by new project
+	(() => {
+		if (!list) {
+			list = [];
+			return;
+		}
+		list = list.map((task) => TaskFactory(task.name, task.deadline));
+	})();
 
 	const add = (name, deadline) => {
 		const task = TaskFactory(name, deadline);

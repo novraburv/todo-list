@@ -20,11 +20,6 @@ const UI = (() => {
   // initialize functionalities
   const init = () => {
     createProjectButton.addEventListener("click", projectFormTrigger);
-
-    const data = ProjectFactory("Default Project");
-    data.taskList.add("default task 1", "11/11/2011");
-    data.taskList.add("default task 2", "10/10/2012");
-    Storage.add(data);
     renderProject();
   };
 

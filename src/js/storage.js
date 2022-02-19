@@ -1,8 +1,20 @@
 "use strict";
 
+import ProjectFactory from "./factories/project";
+
 // module to control storage
 const Storage = (() => {
-	const projects = [];
+	// Load from localStorage if any.
+	let projects;
+	(() => {
+		if (!localStorage.getItem("data")) {
+			projects = [];
+			return;
+		}
+		projects = JSON.parse(localStorage.getItem("data")).map((project) =>
+			ProjectFactory(project.name, project.taskList)
+		);
+	})();
 
 	const add = (project) => {
 		projects.push(project);
