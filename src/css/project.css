@@ -1,7 +1,8 @@
 .project {
 	display: flex;
 	flex-flow: column nowrap;
-	background: var(--primary-color);
+	background: var(--accent-1);
+	margin: 1em;
 }
 .project__container {
 	display: flex;
@@ -17,9 +18,5 @@
 	color: white;
 }
 .btn-remove-project {
-	display: none;
-}
-.project__tasksContainer {
-	display: flex;
-	flex-flow: column nowrap;
+	display: block;
 }

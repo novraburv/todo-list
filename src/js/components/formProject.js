@@ -5,7 +5,7 @@ import UI from "../UI";
 import ProjectFactory from "../factories/project";
 import Storage from "../storage";
 
-const Form = () => {
+const ProjectFormTemplate = () => {
 	const form = document.createElement("div");
 	form.classList.add("form", "form-create-project");
 
@@ -29,8 +29,8 @@ const submitProject = () => {
 	const projectName = document.querySelector("#projectName").value;
 	const project = ProjectFactory(projectName);
 	Storage.add(project);
-	UI.closeProjectForm();
 	UI.renderProject();
+	UI.closeProjectForm();
 };
 
-export default Form;
+export default ProjectFormTemplate;

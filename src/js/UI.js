@@ -1,7 +1,9 @@
 "use strict";
 
-import { default as generateProjectForm } from "./components/formProject";
+import ProjectFormTemplate from "./components/formProject";
 import ProjectTemplate from "./components/project";
+import TasklistTemplate from "./components/tasklist";
+
 import ProjectFactory from "./factories/project";
 import Storage from "./storage";
 
@@ -18,7 +20,7 @@ const UI = (() => {
 
   // initialize functionalities
   const init = () => {
-    createProjectButton.addEventListener("click", openProjectForm);
+    createProjectButton.addEventListener("click", projectFormTrigger);
 
     const data = ProjectFactory("Default Project");
     data.taskList.add("default task 1", "11/11/2011");
@@ -28,11 +30,16 @@ const UI = (() => {
   };
 
   // project form controls
-  const openProjectForm = () => {
+  const projectFormTrigger = () => {
     if (projectForm) {
-      return closeProjectForm();
+      closeProjectForm();
+      return;
     }
-    projectForm = generateProjectForm();
+    openProjectForm();
+  };
+
+  const openProjectForm = () => {
+    projectForm = ProjectFormTemplate();
     projectFormContainer.append(projectForm);
     createProjectButton.innerHTML =
       '<i class="material-icons-outlined">close</i>';
@@ -43,6 +50,22 @@ const UI = (() => {
     projectForm = projectForm.remove();
     createProjectButton.textContent = "Create Project";
     createProjectButton.classList.remove("btn-close");
+  };
+
+  // project control that trigger Tasklist to be shown or hidden;
+  const tasklistTrigger = (e) => {
+    const tasklist = e.currentTarget.parentNode.querySelector(".tasks");
+    if (tasklist) {
+      tasklist.remove();
+      return;
+    }
+    openTasklist(e);
+  };
+
+  const openTasklist = (e) => {
+    const project = e.currentTarget.parentNode;
+    const tasklist = TasklistTemplate();
+    project.append(tasklist);
   };
 
   // render anything from the localStorage
@@ -58,7 +81,7 @@ const UI = (() => {
     });
   };
 
-  return { init, closeProjectForm, renderProject };
+  return { init, closeProjectForm, renderProject, tasklistTrigger };
 })();
 
 export default UI;
