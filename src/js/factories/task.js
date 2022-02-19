@@ -1,9 +1,6 @@
 "use strict";
 
-const Task = (name, deadline) => {
-  name;
-  deadline;
-
+const TaskFactory = (name, deadline) => {
   const getName = () => {
     return name;
   };
@@ -17,7 +14,7 @@ const Task = (name, deadline) => {
     deadline = newDeadline;
   };
 
-  // return finished task
+  // return finished task object ready for json
   const getTask = () => {
     return { name, deadline };
   };
@@ -25,4 +22,4 @@ const Task = (name, deadline) => {
   return { getName, setName, getDeadline, setDeadline, getTask };
 };
 
-export default Task;
+export default TaskFactory;

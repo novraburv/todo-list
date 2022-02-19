@@ -1,27 +1,42 @@
 "use strict";
 
-import { Form as generateProjectForm } from "./components/formProject";
+import ProjectFormTemplate from "./components/formProject";
+import ProjectTemplate from "./components/project";
+import TasklistTemplate from "./components/tasklist";
+
+import ProjectFactory from "./factories/project";
+import Storage from "./storage";
 
 // a collection of UI operators
 const UI = (() => {
+  // constants
   const createProjectButton = document.querySelector(".btn-create-project");
-  const projectFormContainer = document.querySelector(
-    ".container-project-form"
-  );
-  let projectForm = projectFormContainer.querySelector(".form");
+  const projectList = document.querySelector(".project-list");
+
+  // variables
+  let projectForm;
+  let tasklist;
 
   // initialize functionalities
   const init = () => {
-    createProjectButton.addEventListener("click", openProjectForm);
+    createProjectButton.addEventListener("click", projectFormTrigger);
+    renderProject();
   };
 
   // project form controls
-  const openProjectForm = () => {
+  const projectFormTrigger = (e) => {
     if (projectForm) {
-      return closeProjectForm();
+      closeProjectForm();
+      return;
     }
-    projectForm = generateProjectForm();
-    projectFormContainer.append(projectForm);
+    openProjectForm(e);
+  };
+
+  const openProjectForm = (e) => {
+    const main = e.currentTarget.parentNode;
+    projectForm = ProjectFormTemplate();
+    main.append(projectForm);
+
     createProjectButton.innerHTML =
       '<i class="material-icons-outlined">close</i>';
     createProjectButton.classList.add("btn-close");
@@ -29,11 +44,40 @@ const UI = (() => {
 
   const closeProjectForm = () => {
     projectForm = projectForm.remove();
+
     createProjectButton.textContent = "Create Project";
     createProjectButton.classList.remove("btn-close");
   };
 
-  return { init, closeProjectForm };
+  // project control that trigger Tasklist to be shown or hidden;
+  const tasklistTrigger = (e) => {
+    if (tasklist) {
+      tasklist = tasklist.remove();
+      return;
+    }
+    openTasklist(e);
+  };
+
+  const openTasklist = (e) => {
+    const project = e.currentTarget.parentNode;
+    tasklist = TasklistTemplate();
+    project.append(tasklist);
+  };
+
+  // render anything from the localStorage
+  const renderProject = () => {
+    const data = Storage.load();
+    let index = 0;
+
+    projectList.innerHTML = "";
+
+    data.forEach((project) => {
+      projectList.append(ProjectTemplate(project.name, index));
+      index++;
+    });
+  };
+
+  return { init, projectFormTrigger, renderProject, tasklistTrigger };
 })();
 
 export default UI;

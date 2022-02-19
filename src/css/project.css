@@ -1,0 +1,22 @@
+.project {
+	display: flex;
+	flex-flow: column nowrap;
+	background: var(--accent-1);
+	margin: 1em;
+}
+.project__container {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	padding-left: 1em;
+}
+.project__name {
+	color: inherit;
+}
+.btn-remove {
+	background: var(--accent-2);
+	color: white;
+}
+.btn-remove-project {
+	display: block;
+}
