@@ -1,18 +1,22 @@
 "use strict";
 
-const TasklistTemplate = () => {
+import "../../css/tasklist.css";
+import UI from "../UI";
+
+const TaskListTemplate = () => {
 	const tasksContainer = document.createElement("div");
 	tasksContainer.classList.add("tasks");
 
-	const tasklist = document.createElement("div");
-	tasklist.classList.add("tasks__tasklist");
+	const taskList = document.createElement("div");
+	taskList.classList.add("tasks__tasklist");
 
 	const createTaskButton = document.createElement("button");
 	createTaskButton.classList.add("btn", "btn-create-task");
 	createTaskButton.textContent = "Create Task";
+	createTaskButton.addEventListener("click", UI.taskFormTrigger);
 
-	tasksContainer.append(tasklist, createTaskButton);
+	tasksContainer.append(taskList, createTaskButton);
 	return tasksContainer;
 };
 
-export default TasklistTemplate;
+export default TaskListTemplate;

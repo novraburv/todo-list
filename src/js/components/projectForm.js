@@ -11,8 +11,8 @@ const ProjectFormTemplate = () => {
 
 	const input = document.createElement("input");
 	input.classList.add("form__input");
-	input.name = "projectName";
-	input.id = "projectName";
+	input.name = "project-name";
+	input.id = "project-name";
 	input.type = "text";
 	input.placeholder = "Project Name";
 

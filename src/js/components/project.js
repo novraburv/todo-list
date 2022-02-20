@@ -10,11 +10,11 @@ const ProjectTemplate = (name, index) => {
 	// task Container will be generated later with other component and plugged here
 	const projectCard = document.createElement("div");
 	projectCard.classList.add("project");
+	projectCard.dataset.index = index;
 
 	// project container, contain necessary details about the project and a remove button
 	const projectContainer = document.createElement("div");
 	projectContainer.classList.add("project__container");
-	projectContainer.dataset.index = index;
 	projectContainer.addEventListener("click", UI.tasklistTrigger);
 
 	const projectName = document.createElement("h3");
