@@ -1,7 +1,7 @@
 "use strict";
 
 import "../../css/project.css";
-import "../UI";
+import Storage from "../storage";
 import UI from "../UI";
 
 // A component to render projects to UI
@@ -24,11 +24,17 @@ const ProjectTemplate = (name, index) => {
 	const projectRemove = document.createElement("button");
 	projectRemove.classList.add("btn", "btn-remove", "btn-remove-project");
 	projectRemove.innerHTML = '<i class="material-icons-outlined">remove</i>';
+	projectRemove.addEventListener("click", removeProject);
 
 	projectContainer.append(projectName, projectRemove);
 
 	projectCard.append(projectContainer);
 	return projectCard;
+};
+
+const removeProject = (e) => {
+	Storage.remove.project(e.currentTarget.parentNode.parentNode.dataset.index);
+	UI.renderProject();
 };
 
 export default ProjectTemplate;
