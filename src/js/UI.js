@@ -23,6 +23,7 @@ const UI = (() => {
     renderProject();
   };
 
+  // ELEMENT TRIGGERS
   //
   const projectFormTrigger = (e) => {
     if (projectForm) {

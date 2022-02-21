@@ -16,13 +16,30 @@ const Storage = (() => {
 		);
 	})();
 
-	const add = (project) => {
-		projects.push(project);
-		updateLocalStorage(projects);
+	const add = addOperations();
+	const remove = removeOperations();
+
+	const addOperations = () => {
+		const project = (projectName) => {
+			projects.push(projectName);
+			updateLocalStorage(projects);
+		};
+		const task = (projectIndex, taskName, taskDeadline) => {
+			projects[projectIndex].taskList.add(taskName, taskDeadline);
+			updateLocalStorage(projects);
+		};
+		return { project, task };
 	};
-	const remove = (index) => {
-		projects.splice(index, 1);
-		updateLocalStorage(projects);
+	const removeOperations = () => {
+		const project = (projectIndex) => {
+			projects.splice(projectIndex, 1);
+			updateLocalStorage(projects);
+		};
+		const task = (projectIndex, taskIndex) => {
+			project[projectIndex].taskList.remove(taskIndex);
+			updateLocalStorage(projects);
+		};
+		return { project, task };
 	};
 
 	// reveal data produced by the factories (Project, TaskList, and Task)

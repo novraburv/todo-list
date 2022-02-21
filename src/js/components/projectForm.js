@@ -26,9 +26,9 @@ const ProjectFormTemplate = () => {
 };
 
 const submitProject = () => {
-	const projectName = document.querySelector("#projectName").value;
+	const projectName = document.querySelector("#project-name").value;
 	const project = ProjectFactory(projectName);
-	Storage.add(project);
+	Storage.add.project(project);
 	UI.renderProject();
 	UI.projectFormTrigger();
 };

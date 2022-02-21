@@ -25,8 +25,18 @@ const taskFormTemplate = () => {
 	const submitButton = document.createElement("button");
 	submitButton.classList.add("btn", "btn-submit");
 	submitButton.innerHTML = '<i class="material-icons-outlined">done</i>';
+	submitButton.addEventListener("click", submitTask);
+
 	form.append(inputName, inputDeadline, submitButton);
 	return form;
+};
+
+const submitTask = (e) => {
+	const form = e.currentTarget.parentNode;
+	const taskName = form.querySelector("#task-name").value;
+	const taskDeadline = form.querySelector("#task-deadline").value;
+
+	console.log({ taskName, taskDeadline });
 };
 
 export default taskFormTemplate;
