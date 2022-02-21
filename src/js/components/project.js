@@ -33,6 +33,7 @@ const ProjectTemplate = (name, index) => {
 };
 
 const removeProject = (e) => {
+	e.stopPropagation();
 	Storage.remove.project(e.currentTarget.parentNode.parentNode.dataset.index);
 	UI.renderProject();
 };

@@ -33,7 +33,7 @@ const Storage = (() => {
 			updateLocalStorage(projects);
 		};
 		const task = (projectIndex, taskIndex) => {
-			project[projectIndex].taskList.remove(taskIndex);
+			projects[projectIndex].taskList.remove(taskIndex);
 			updateLocalStorage(projects);
 		};
 		return { project, task };

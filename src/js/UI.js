@@ -122,14 +122,19 @@ const UI = (() => {
       `.project[data-index="${projectIndex}"]`
     );
     const taskList = project.querySelector(".tasks__tasklist");
-    let index = 0;
+    let taskIndex = 0;
 
     taskList.innerHTML = "";
 
     data[projectIndex].taskList.forEach((task) => {
-      const taskToBePrinted = TaskTemplate(task.name, task.deadline, index);
+      const taskToBePrinted = TaskTemplate(
+        projectIndex,
+        taskIndex,
+        task.name,
+        task.deadline
+      );
       taskList.append(taskToBePrinted);
-      index++;
+      taskIndex++;
     });
   };
 
