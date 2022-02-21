@@ -1,8 +1,8 @@
 "use strict";
 
 import "../../css/form.css";
-import "../UI";
-import "../storage";
+import Storage from "../storage";
+import UI from "../UI";
 
 const taskFormTemplate = () => {
 	const form = document.createElement("div");
@@ -33,10 +33,16 @@ const taskFormTemplate = () => {
 
 const submitTask = (e) => {
 	const form = e.currentTarget.parentNode;
+	const projectIndex = form.parentNode.parentNode.dataset.index;
 	const taskName = form.querySelector("#task-name").value;
 	const taskDeadline = form.querySelector("#task-deadline").value;
 
-	console.log({ taskName, taskDeadline });
+	Storage.add.task(projectIndex, taskName, taskDeadline);
+	UI.renderTasks(projectIndex);
+
+	form.previousElementSibling.classList.remove("btn-close");
+	form.previousElementSibling.textContent = "Create Task";
+	form.remove();
 };
 
 export default taskFormTemplate;

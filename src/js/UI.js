@@ -4,6 +4,7 @@ import ProjectFormTemplate from "./components/projectForm";
 import taskFormTemplate from "./components/taskForm";
 import ProjectTemplate from "./components/project";
 import TaskListTemplate from "./components/tasklist";
+import TaskTemplate from "./components/task";
 
 import Storage from "./storage";
 
@@ -52,7 +53,8 @@ const UI = (() => {
 
   //
   const taskFormTrigger = (e) => {
-    const taskForm = e.currentTarget.nextElementSibling;
+    const taskForm =
+      e.currentTarget.parentNode.querySelector(".form-create-task");
     if (taskForm) {
       closeTaskForm(e);
       return;
@@ -91,6 +93,7 @@ const UI = (() => {
     const project = e.currentTarget.parentNode;
     taskList = TaskListTemplate();
     project.append(taskList);
+    renderTasks(project.dataset.index);
   };
 
   // render anything from the localStorage
@@ -106,11 +109,29 @@ const UI = (() => {
     });
   };
 
+  const renderTasks = (projectIndex) => {
+    const data = Storage.load();
+    const project = document.querySelector(
+      `.project[data-index="${projectIndex}"]`
+    );
+    const taskList = project.querySelector(".tasks__tasklist");
+    let index = 0;
+
+    taskList.innerHTML = "";
+
+    data[projectIndex].taskList.forEach((task) => {
+      const taskToBePrinted = TaskTemplate(task.name, task.deadline, index);
+      taskList.append(taskToBePrinted);
+      index++;
+    });
+  };
+
   return {
     init,
     projectFormTrigger,
     taskFormTrigger,
     renderProject,
+    renderTasks,
     tasklistTrigger,
   };
 })();
