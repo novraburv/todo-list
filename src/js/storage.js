@@ -2,7 +2,7 @@
 
 import ProjectFactory from "./factories/project";
 
-// module to control storage
+// Storage module
 const Storage = (() => {
 	// Load from localStorage if any.
 	let projects;
@@ -15,9 +15,6 @@ const Storage = (() => {
 			ProjectFactory(project.name, project.taskList)
 		);
 	})();
-
-	const add = addOperations();
-	const remove = removeOperations();
 
 	const addOperations = () => {
 		const project = (projectName) => {
@@ -41,6 +38,9 @@ const Storage = (() => {
 		};
 		return { project, task };
 	};
+
+	const add = addOperations();
+	const remove = removeOperations();
 
 	// reveal data produced by the factories (Project, TaskList, and Task)
 	// before insert them into LocalStorage
