@@ -39,10 +39,7 @@ const submitTask = (e) => {
 
 	Storage.add.task(projectIndex, taskName, taskDeadline);
 	UI.renderTasks(projectIndex);
-
-	form.previousElementSibling.classList.remove("btn-close");
-	form.previousElementSibling.textContent = "Create Task";
-	form.remove();
+	UI.closeFormOnSubmit(e);
 };
 
 export default taskFormTemplate;

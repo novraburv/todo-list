@@ -15,70 +15,77 @@ const UI = (() => {
   const projectList = document.querySelector(".project-list");
 
   // variables
-  let projectForm;
   let taskList;
 
   // initialize functionalities
   const init = () => {
-    createProjectButton.addEventListener("click", projectFormTrigger);
+    createProjectButton.addEventListener("click", formTrigger);
     renderProject();
   };
 
   // ELEMENT TRIGGERS
   //
-  const projectFormTrigger = (e) => {
-    if (projectForm) {
-      closeProjectForm();
+  // Form trigger -- a trigger that control two forms.
+  // Project form and Task form.
+  const formTrigger = (e) => {
+    const form = e.currentTarget.parentNode.querySelector(".form");
+    if (form) {
+      closeForm(e);
       return;
     }
-    openProjectForm(e);
+    openForm(e);
   };
 
-  const openProjectForm = (e) => {
-    const main = e.currentTarget.parentNode;
-    projectForm = ProjectFormTemplate();
-    main.append(projectForm);
+  const openForm = (event) => {
+    const createFormButton = event.currentTarget;
+    const parent = createFormButton.parentNode;
+    let form;
 
-    createProjectButton.innerHTML =
-      '<i class="material-icons-outlined">close</i>';
-    createProjectButton.classList.add("btn-close");
-  };
-
-  const closeProjectForm = () => {
-    projectForm = projectForm.remove();
-
-    createProjectButton.textContent = "Create Project";
-    createProjectButton.classList.remove("btn-close");
-  };
-
-  //
-  const taskFormTrigger = (e) => {
-    const taskForm =
-      e.currentTarget.parentNode.querySelector(".form-create-task");
-    if (taskForm) {
-      closeTaskForm(e);
-      return;
+    if (createFormButton.classList.contains("btn-create-project")) {
+      form = ProjectFormTemplate();
     }
-    openTaskForm(e);
+    if (createFormButton.classList.contains("btn-create-task")) {
+      form = taskFormTemplate();
+    }
+
+    parent.append(form);
+
+    createFormButton.innerHTML = '<i class="material-icons-outlined">close</i>';
+    createFormButton.classList.add("btn-close");
   };
 
-  const openTaskForm = (event) => {
-    const createTaskButton = event.currentTarget;
-    const parent = createTaskButton.parentNode;
-    const taskForm = taskFormTemplate();
-    parent.append(taskForm);
+  const closeForm = (event) => {
+    const createFormButton = event.currentTarget;
+    const form = event.currentTarget.nextElementSibling;
+    let formType;
 
-    createTaskButton.innerHTML = '<i class="material-icons-outlined">close</i>';
-    createTaskButton.classList.add("btn-close");
+    if (createFormButton.classList.contains("btn-create-project")) {
+      formType = "Project";
+    }
+    if (createFormButton.classList.contains("btn-create-task")) {
+      formType = "Task";
+    }
+
+    createFormButton.textContent = `Create ${formType}`;
+    createFormButton.classList.remove("btn-close");
+    form.remove();
   };
 
-  const closeTaskForm = (event) => {
-    const createTaskButton = event.currentTarget;
-    const taskForm = event.currentTarget.nextElementSibling;
+  const closeFormOnSubmit = (event) => {
+    const submitButton = event.currentTarget;
+    const createFormButton = submitButton.parentNode.previousElementSibling;
+    let formType;
 
-    taskForm.remove();
-    createTaskButton.textContent = "Create Task";
-    createTaskButton.classList.remove("btn-close");
+    if (createFormButton.classList.contains("btn-create-project")) {
+      formType = "Project";
+    }
+    if (createFormButton.classList.contains("btn-create-task")) {
+      formType = "Task";
+    }
+
+    createFormButton.textContent = `Create ${formType}`;
+    createFormButton.classList.remove("btn-close");
+    submitButton.parentNode.remove();
   };
 
   // project control that trigger Tasklist to be shown or hidden;
@@ -128,8 +135,8 @@ const UI = (() => {
 
   return {
     init,
-    projectFormTrigger,
-    taskFormTrigger,
+    formTrigger,
+    closeFormOnSubmit,
     renderProject,
     renderTasks,
     tasklistTrigger,

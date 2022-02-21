@@ -25,12 +25,13 @@ const ProjectFormTemplate = () => {
 	return form;
 };
 
-const submitProject = () => {
-	const projectName = document.querySelector("#project-name").value;
+const submitProject = (e) => {
+	const form = e.currentTarget.parentNode;
+	const projectName = form.querySelector("#project-name").value;
 	const project = ProjectFactory(projectName);
 	Storage.add.project(project);
 	UI.renderProject();
-	UI.projectFormTrigger();
+	UI.closeFormOnSubmit(e);
 };
 
 export default ProjectFormTemplate;

@@ -13,7 +13,7 @@ const TaskListTemplate = () => {
 	const createTaskButton = document.createElement("button");
 	createTaskButton.classList.add("btn", "btn-create-task");
 	createTaskButton.textContent = "Create Task";
-	createTaskButton.addEventListener("click", UI.taskFormTrigger);
+	createTaskButton.addEventListener("click", UI.formTrigger);
 
 	tasksContainer.append(taskList, createTaskButton);
 	return tasksContainer;
