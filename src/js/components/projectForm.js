@@ -11,8 +11,8 @@ const ProjectFormTemplate = () => {
 
 	const input = document.createElement("input");
 	input.classList.add("form__input");
-	input.name = "projectName";
-	input.id = "projectName";
+	input.name = "project-name";
+	input.id = "project-name";
 	input.type = "text";
 	input.placeholder = "Project Name";
 
@@ -25,12 +25,13 @@ const ProjectFormTemplate = () => {
 	return form;
 };
 
-const submitProject = () => {
-	const projectName = document.querySelector("#projectName").value;
+const submitProject = (e) => {
+	const form = e.currentTarget.parentNode;
+	const projectName = form.querySelector("#project-name").value;
 	const project = ProjectFactory(projectName);
-	Storage.add(project);
+	Storage.add.project(project);
 	UI.renderProject();
-	UI.projectFormTrigger();
+	UI.closeFormOnSubmit(e);
 };
 
 export default ProjectFormTemplate;
