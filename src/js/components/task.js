@@ -1,5 +1,6 @@
 "use strict";
 
+import "../../css/task.css";
 import Storage from "../storage";
 import UI from "../UI";
 

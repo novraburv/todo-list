@@ -1,0 +1,16 @@
+.tasks__task {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tasks__task-details {
+	margin-left: 1em;
+}
+
+.tasks__task-name {
+	margin-bottom: 0;
+}
+
+.tasks__task-deadline {
+	margin-top: 0;
+}
